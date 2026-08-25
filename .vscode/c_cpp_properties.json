@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "compilerPath": "/opt/homebrew/bin/g++-16",
+            "intelliSenseMode": "macos-gcc-arm64",
+            "cppStandard": "gnu++26",
+            "cStandard": "gnu23",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ]
+        }
+    ],
+    "version": 4
+}
