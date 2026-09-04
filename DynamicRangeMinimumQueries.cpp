@@ -19,11 +19,28 @@ void build(int node, int l, int r)
     return;
 }
 
+void update(int node, int l, int r, int k, int u)
+{
+    if (l == r)
+    {
+        tree[node] = u;
+        return;
+    }
+
+    int mid = l + (r - l) / 2;
+    if (k <= mid)
+        update(node * 2, l, mid, k, u);
+    else
+        update(node * 2 + 1, mid + 1, r, k, u);
+
+    tree[node] = min(tree[node * 2], tree[node * 2 + 1]);
+}
+
 int query(int node, int l, int r, int tl, int tr)
 {
     if (tr < l || r < tl)
         return INF;
-        
+
     if (tl <= l && r <= tr)
         return tree[node];
 
@@ -47,9 +64,17 @@ int main()
     build(1, 1, n);
     for (int i = 0; i < q; i++)
     {
-        int a, b;
-        cin >> a >> b;
-        cout << query(1, 1,n,a,b) << "\n";
+        int k, x, y;
+        cin >> k >> x >> y;
+        if (k == 1)
+        {
+            update(1, 1, n, x, y);
+        }
+        else
+        {
+            cout << query(1, 1, n, x, y) << "\n";
+        }
     }
+
     return 0;
 }
