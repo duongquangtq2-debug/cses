@@ -17,9 +17,11 @@ int main()
         long long sum = 0;
         for (int i = 0; i < n; i++)
         {
-            unordered_map<int, int> mp;
+            vector<int> cnt(n + 9, 0);
             vector<int> val(n, 0);
-            mp[ar[i]]++;
+            if (ar[i] <= n && ar[i] >= 0)
+                cnt[ar[i]]++;
+
             if (ar[i] > 0)
                 val[i] = 0;
             else
@@ -27,7 +29,8 @@ int main()
 
             for (int j = i + 1; j < n; j++)
             {
-                mp[ar[j]]++;
+                if (ar[j] <= n && ar[j] >= 0)
+                    cnt[ar[j]]++;
 
                 if (ar[j] == -1)
                 {
@@ -35,19 +38,18 @@ int main()
                     do
                     {
                         k++;
-                    } while (mp[k] != 0);
+                    } while (cnt[k] != 0);
                     val[j] = k;
                 }
                 else
                 {
-                    if (ar[j] <= val[j - 1] && mp[ar[j]] == 1)
+                    if (ar[j] <= val[j - 1] && cnt[ar[j]] == 1)
                     {
-
                         int k = val[j - 1];
                         do
                         {
                             k++;
-                        } while (mp[k] != 0);
+                        } while (cnt[k] != 0);
                         val[j] = k;
                     }
                     else
