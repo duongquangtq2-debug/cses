@@ -12,6 +12,7 @@ int main()
     {
         int n, m;
         cin >> n >> m;
+
         vector<int> a(m + 1);
         vector<int> ans(m + 1);
         for (int i = 1; i <= m; i++)
@@ -27,27 +28,29 @@ int main()
 
         for (int u = 1; u <= m; u++)
         {
-            if (LOW.size() > 1)
+            if ((int)LOW.size() >= 2)
             {
-                int stt = LOW.size() - 1;
+                int stt = (int)LOW.size() - 1;
                 if (LOW[stt] == a[u])
                     stt--;
+
                 ans[u] = LOW[stt];
+
                 HIGHT.push_back(LOW[stt]);
                 LOW.erase(LOW.begin() + stt);
             }
-            else if (LOW.size())
+            else if ((int)LOW.size() == 1)
             {
                 ans[u] = LOW[0];
-                if (LOW[0] == a[u])
-                {
-                    swap(LOW, HIGHT);
-                }
-                else
+
+                if (LOW[0] != a[u])
                 {
                     HIGHT.push_back(LOW[0]);
-                    LOW.erase(LOW.begin());
+                    LOW.clear();
                 }
+                if (HIGHT.empty())
+                    continue;
+                swap(LOW, HIGHT);
             }
         }
 
