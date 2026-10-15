@@ -14,7 +14,6 @@ int main()
         cin >> n;
 
         vector<int> color(n + 1, 1);
-        vector<vector<int>> adj(n + 1);
 
         int k = log2(n) + 1;
         cout << k << "\n";
